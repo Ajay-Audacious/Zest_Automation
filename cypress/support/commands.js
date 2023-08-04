@@ -23,3 +23,58 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// cypress/support/commands.ts
+
+Cypress.Commands.add('getBySel', (selector, ...args) => {
+    return cy.get(`[data-test=${selector}]`, ...args)
+  })
+  
+  Cypress.Commands.add('getBySelLike', (selector, ...args) => {
+    return cy.get(`[data-test*=${selector}]`, ...args)
+  })
+//   cy.get('[data-test="submit"]').click()
+
+// cypress/support/commands.js
+
+Cypress.Commands.add('uploadFile', (fileName, fileType) => {
+  cy.get('input[type="file"]').as('fileInput');
+  cy.fixture(fileName).then(fileContent => {
+    let mimeType;
+    switch (fileType) {
+      case 'png':
+        mimeType = 'image/png';
+        break;
+      case 'jpg':
+      case 'jpeg':
+        mimeType = 'image/jpeg';
+        break;
+      case 'pdf':
+        mimeType = 'application/pdf';
+        break;
+      default:
+        throw new Error('Unsupported file type');
+    }
+
+    cy.get('@fileInput').attachFile({
+      fileContent: fileContent.toString(),
+      fileName,
+      mimeType,
+    });
+  });
+});
+
+//seprate file upload
+ 
+// cy.get('input[type="file"]').as('fileInput');
+    // cy.fixture('testimg.png').then(fileContent => {
+    //   cy.get('@fileInput').attachFile({
+    //   fileContent: fileContent.toString(),
+    //   fileName: 'testimg.png',
+    //   mimeType: 'image/png'
+    //   });
+    //   });
+
+    Cypress.Commands.add("navigateToPreviousMonth", () => {
+      cy.get(".fc-prev-button").click();
+    });

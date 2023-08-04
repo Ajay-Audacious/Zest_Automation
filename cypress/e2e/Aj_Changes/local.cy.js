@@ -1,74 +1,41 @@
 /// <reference types="cypress-xpath" />
+// import { faker } from "@faker-js/faker";
+// // import faker from 'faker';
+// import { credentials } from "../Validation/logs";
+// import { verifyErrorMessage } from "../Validation/errorValidation";
+// // const email =  faker.internet.email()
+// // name1 = faker.name.findName();
+// // contactNumber = `9${faker.phone.phoneNumber('#########')}`; // Generate a 10-digit phone number
+// // import { employeesErrorMessage, login } from "../common_component/common_All";
+// describe("Login Test", () => {
+//   beforeEach(() => {
+//     // // login(credentials);
+//     cy.visit('https://docs.google.com/spreadsheets/d/1ePpug--VW6E8ZAnOBmIUOUxacoFkKZF2GCfhB5VPDlA/edit#gid=917108171');
+//     // cy.viewport(3000, 1500);
+//     // cy.visit('https://staging.zesthrm.com/login');
+//     // cy.get('#login_email').type("ajayy3@yopmail.com");
+//     // cy.get('[data-test="password"]').type("ajayy3@yopmail.com");
+//     //  cy.get('#login_password').type("Demo@123");
+//     // cy.get('#submit').click();
+//     // cy.contains("Employee", { timeout: 5000 }).click();
+//   });
+// });
+import 'cypress-file-upload';
+describe('File upload', () => {
+  it('File upload', () => {
+    //  cy.viewport(3000, 1500);
+    // cy.visit('https://staging.zesthrm.com/login');
+    // cy.get('#login_email').type("superadmin@yopmail.com");
+    // cy.get('#login_password').type("Demo@12345");
+    // cy.get('#submit').click();
+    // cy.contains("Employee", { timeout: 5000 }).click();
+    // cy.get('#employee_add').click();
+    // cy.get('#add_document').click();
+    // cy.get('#register_document').type('Pancard')
+    // cy.uploadFile('testimg.png', 'png');
+    // cy.viewport(2000, 1500);
+    // cy.visit('https://docs.google.com/spreadsheets/d/1ePpug--VW6E8ZAnOBmIUOUxacoFkKZF2GCfhB5VPDlA/edit#gid=917108171');
+    // cy.get('[style="width: 1942px; height: 1283px;"]').click();
 
-it('executes nested if and else statements correctly', () => {
-  
-  cy.visit("https://staging.zesthrm.com");
-  cy.viewport(3000, 1500);
-  cy.get("#login_email").type("superadmin@yopmail.com");
-  cy.get("#login_password").type("Demo@12345");
-  cy.get("#submit").click();
+  });
 });
-//
-// 01. Verify that the date picker opens when the input field or button is clicked.
-it('should open the date picker', () => {
-  cy.visit('/your-page-with-date-picker');
-  cy.get('#date-input').click();
-  cy.get('.datepicker').should('be.visible');
-});
-
-//Verify that the correct date is selected when a date is clicked in the date picker.
-it('should select the correct date', () => {
-  cy.visit('/your-page-with-date-picker');
-  cy.get('#date-input').click();
-  cy.get('.datepicker-days .day:not(.disabled)').contains('15').click();
-  cy.get('#date-input').should('have.value', '04/15/2023');
-});
-
-//Verify that selecting an invalid date displays an error message.
-
-it('should display an error message for invalid dates', () => {
-  cy.visit('/your-page-with-date-picker');
-  cy.get('#date-input').click();
-  cy.get('.datepicker-days .day.disabled').contains('1').click();
-  cy.get('.datepicker .datepicker-errors').should('be.visible');
-  cy.get('.datepicker .datepicker-errors').contains('Please select a valid date');
-});
-
-//Verify that selecting a date in the future is not allowed.
-it('should not allow selection of future dates', () => {
-  cy.visit('/your-page-with-date-picker');
-  cy.get('#date-input').click();
-  cy.get('.datepicker-days .day:not(.disabled)').contains('15').click();
-  cy.get('#date-input').should('have.value', '04/15/2023');
-  cy.get('#date-input').click();
-  cy.get('.datepicker-days .day:not(.disabled)').contains('15').click();
-  cy.get('#date-input').should('have.value', '04/15/2023');
-});
-//Verify that the date picker can be closed.
-
-it('should close the date picker', () => {
-  cy.visit('/your-page-with-date-picker');
-  cy.get('#date-input').click();
-  cy.get('.datepicker .close').click();
-  cy.get('.datepicker').should('not.be.visible');
-});
-
-it('Only', () => {
-  // cy.viewport(4000, 1500);
-  cy.visit('https://hrm-front-end.pages.dev/login');
-  // cy.get('.styles_centerSection__rXnwF > .ant-image > .ant-image-img').click();
-  // cy.contains("Preview").click();
-  // cy.get('.styles_centerSection__rXnwF > .ant-image > 
-  cy.get('.styles_centerSection__rXnwF > .ant-image > .ant-image-img').click().should('be.visible')
-  cy.get('p').should('have.text','Human Resource Management provides knowledge to empower HR by letting you engage with your workforce in a strategic way.')
-  
-  // cy.xpath("//div[@class='ant-col styles_centerSection__rXnwF ant-col-xs-24 ant-col-sm-24 ant-col-md-12']//div[@class='ant-image-mask']").click()
-});
-
-
-
-
-
-
-
-

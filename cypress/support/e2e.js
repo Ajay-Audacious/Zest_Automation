@@ -18,3 +18,7 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+require('cypress-xpath');   
+import 'cypress-iframe';
+// cypress/support/index.js
+// require('cypress-repeat');

@@ -5,35 +5,15 @@ import { verifyErrorRole } from "../Validation/errorValidation";
 
 const name = faker.name.findName();
 const message = faker.lorem.sentence();
-describe("Roles Test cases", () => {
+import { login, rolesErrorMessage } from '../common_component/common_All';
+describe('Login Test', () => {
   beforeEach(() => {
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      return false;
-    });
-    cy.visit("https://staging.zesthrm.com");
-    cy.viewport(3000, 1500);
-    cy.get("input[type=text]").type(credentials.id);
-    cy.get("input[type=password").type(credentials.password);
-    cy.get("#submit").click();
+    login(credentials);
     cy.contains("Roles", { timeout: 5000 }).click();
   });
-  it("CheckError Message", () => {
-    cy.get("#add_role").click();
-    cy.get("#role_submit").click();
-    cy.url().should("include", "https://staging.zesthrm.com/role/add");
-
-    const errors = {
-      register_name_help: "Please enter the role name",
-      register_description_help: "Please enter the description",
-      register_dashBoard_help:
-        "Please enter at least one permission in dashboard",
-    };
-    for (const key in errors) {
-      if (Object.hasOwnProperty.call(errors, key)) {
-        const message = errors[key];
-        verifyErrorRole(key, message);
-      }
-    }
+  describe("Roles Test cases", () => {
+    it("CheckError Message", () => {
+      rolesErrorMessage(); //Verify the all placeholder error message
   });
   it("Add Role", () => {
     cy.get("#add_role").click();
@@ -42,7 +22,7 @@ describe("Roles Test cases", () => {
     cy.get("#role_description").type(message);
     cy.get("div[id='register_dashBoard'] input[value='write']").check();
     cy.get("#role_submit").click();
-    cy.url().should("include", "https://staging.zesthrm.com/role/add");
+    cy.url().should("include", "https://staging.zesthrm.com/roles/new");
   });
   it("Dublicate Roles", () => {
     cy.get("#add_role").click();
@@ -50,7 +30,7 @@ describe("Roles Test cases", () => {
     cy.get("#role_description").type(message);
     cy.get("div[id='register_dashBoard'] input[value='write']").check();
     cy.get("#role_submit").click();
-    cy.url().should("include", "https://staging.zesthrm.com/role/add");
+    cy.url().should("include", "https://staging.zesthrm.com/roles/new");
   });
   it("Search Role & Edit Role", () => {
     cy.get("#search_here").type(name);
@@ -68,4 +48,5 @@ describe("Roles Test cases", () => {
     cy.get("#role_submit").click();
     cy.url().should("include", "https://staging.zesthrm.com/roles");
   });
+});
 });

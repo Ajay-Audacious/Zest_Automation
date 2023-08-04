@@ -9,6 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^12.16.0"
+    "dayjs": "^1.11.9",
+    "Faker": "npm:faker@^5.5.3",
+    "file-type": "^18.5.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "chai-jquery": "^2.1.0",
+    "cypress": "^12.17.2",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-iframe": "^1.0.1",
+    "cypress-repeat": "^2.3.3",
+    "cypress-xpath": "^2.0.1",
+    "faker": "^5.5.3"
   }
 }

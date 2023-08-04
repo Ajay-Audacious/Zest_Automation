@@ -1,20 +1,13 @@
 /// <reference types="cypress-xpath" />
-import { testCredentials } from "../Validation/logs";
+import { credentials, testCredentials } from "../Validation/logs";
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import 'chai-jquery';
-// import { error } from "cypress/types/jquery";
-
-beforeEach(() => {
-  cy.visit("https://staging.zesthrm.com/");
-  cy.get("input[type=text]").type(testCredentials.id);
-  cy.get("input[type=password").type(testCredentials.password);
-  cy.get("button[type=submit").click();
-  cy.viewport(5000, 4000);
-  Cypress.on("uncaught:exception", (err, runnable) => {
-    return false;
+import { login } from '../common_component/common_All';
+describe('Login Test', () => {
+  beforeEach(() => {
+    login(credentials);
   });
-});
 describe("Verify Dashboard Data", () => {
   it("Check Dashboard Data Total Record", () => {
     cy.get(".ant-btn-primary").click();
@@ -50,5 +43,5 @@ describe("Verify Dashboard Data", () => {
     });
   });
   });
-  
+});
 

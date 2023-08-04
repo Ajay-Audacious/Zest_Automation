@@ -1,19 +1,15 @@
 /// <reference types="cypress-xpath" />
 import { credentials } from "../Validation/logs";
 import { verifyErrorRole } from "../Validation/errorValidation";
-describe("Update employee Details", () => {
+import { login } from '../common_component/common_All';
+describe('Login Test', () => {
   beforeEach(() => {
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      return false;
-    });
-    cy.visit("https://staging.zesthrm.com");
-    cy.viewport(3000, 1500);
-    cy.get("input[type=text]").type(credentials.id);
-    cy.get("input[type=password").type(credentials.password);
+    login(credentials);
     cy.get("#submit").click();
     cy.contains("Setting", { timeout: 5000 }).click();
   });
-
+  
+  describe("Update employee Details", () => {
   it('Verfiy Error message', () => {
     cy.get('#editUser_name').clear();
     cy.get('#register_contact').clear();
@@ -37,3 +33,4 @@ describe("Update employee Details", () => {
   });
   
 });
+  });
