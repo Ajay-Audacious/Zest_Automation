@@ -6,16 +6,15 @@ import 'cypress-file-upload';
 import { login, orgErrorMessage } from '../common_component/common_All';
 describe('Login Test', () => {
   beforeEach(() => {
-    login(credentials);
+    cy.login();
     cy.contains("Settings", { timeout: 5000 }).click();
     cy.contains("Organization", { timeout: 5000 }).click();
-  });
-  
+  })
   describe("organization_Detail", () => {
     it("Verify Error message", () => {
       orgErrorMessage(); //Verify the validation error message
   });
-  it.only('Add Details', () => {
+  it('Add Details First Time', () => { 
     cy.get('#organizations_btn').click()
     cy.url().should("include", "https://staging.zesthrm.com/organizations");
     const organizationName = faker.company.companyName();
@@ -41,6 +40,24 @@ describe('Login Test', () => {
     cy.get('#profile_upload_button').click();
     cy.uploadFile('testimg.png', 'png');
     cy.get("#save").click();
+  });
+  it('Update ORG Details', () => {
+    cy.get('#organizations_btn').click();
+    //Change ORG Address
+    cy.get('#registered_address').clear().type("78 Vijay Nagar Near by GS Plaza");
+    cy.get('#address_checkbox').click();
+    cy.get('#save').click();
+  });
+  it('Remove and Upload Logo', () => {
+    //Remove logo
+    cy.get('#remove_organization_logo').click();
+    cy.contains("Are you sure you want to remove the organization logo?").should("be.visible");
+    cy.get('#yes').click();
+    //Add ORG Logo
+    cy.get('#organizations_btn').click();
+    cy.get('#profile_upload_button').click();
+    cy.uploadFile('testimg.png', 'png');
+    cy.get('#save').click();
   });
 });
 });

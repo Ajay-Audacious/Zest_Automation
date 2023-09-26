@@ -1,11 +1,12 @@
-import { credentials } from "../Validation/logs";
-import { changePassword } from "../Validation/logs";
+import { credentials } from "../../Validation/logs";
+import { changePassword } from "../../Validation/logs";
 // import { Faker, faker } from "@faker-js/faker";
-import { login } from '../common_component/common_All';
+import { login } from '../../common_component/common_All';
 describe('Login Test', () => {
   beforeEach(() => {
-    login(credentials);
+    cy.login();
     cy.contains("Setting", { timeout: 5000 }).click();
+    cy.get('#Profile').click();
     cy.contains("Security", { timeout: 5000 }).click();
   });
   describe('Change Password', () => {

@@ -78,3 +78,36 @@ Cypress.Commands.add('uploadFile', (fileName, fileType) => {
     Cypress.Commands.add("navigateToPreviousMonth", () => {
       cy.get(".fc-prev-button").click();
     });
+//For Working hours
+    Cypress.Commands.add("checkSuccessMessage", () => {
+      cy.get('.ant-message-notice-content').should("be.visible").then(($message) => {
+        const messageText = $message.text();
+        if (messageText.includes("Created successfully")) {
+          // Handle the "Created successfully" case
+          expect(messageText).to.include("Created successfully");
+        } else if (messageText.includes("Updated successfully")) {
+          // Handle the "Updated successfully" case
+          expect(messageText).to.include("Updated successfully");
+        } else {
+          // Handle other cases or fail the test if needed
+          cy.wrap(false).should("equal", true);
+        }
+      });
+    });
+
+    //Login 
+    // commands.js
+
+Cypress.Commands.add("login", () => {
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    return false;
+  })
+  cy.viewport(3000, 1500);
+  cy.visit("https://staging.zesthrm.com/login");
+  cy.get("#login_email").type("superadmin@yopmail.com");
+  cy.get("#login_password").type("Demo@12345");
+  cy.get("#submit").click();
+});
+
+
+    

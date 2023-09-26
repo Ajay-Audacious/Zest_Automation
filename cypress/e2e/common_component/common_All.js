@@ -22,12 +22,13 @@ export const employeesErrorMessage = () => {
   cy.get("#employee_add").click();
   cy.get("#save").click();
   const errors = {
-    register_name_help: "Please enter name",
-    register_email_help: "Please enter email address",
-    register_contactNumber_help: "Please enter contact number",
-    register_gender_help: "Please select gender",
-    register_DOB_help: "Please select date of birth",
-    // register_joiningDate_help: "Please select joining date"
+    name_help: "Please enter name",
+    email_help: "Please enter valid email address",
+    contactNumber_help: "Please enter contact number",
+    employeeCode_help: "Please enter employee code",
+    joiningDate_help: "Please select joining date",
+    salary_help: "Please enter salary",
+    allocatedLeaves_help: "Please fill leaves",
   };
   for (const key in errors) {
     if (Object.hasOwnProperty.call(errors, key)) {
@@ -99,8 +100,7 @@ export const orgErrorMessage = () => {
     Organization_organizationEmail_help: "Please enter email address",
     Organization_industryType_help: "Please enter industry type",
     Organization_BuisnessLocation_help: "Please enter business location",
-    // Organization_GST_Deatils_help: "Please enter gst details",
-    // Organization_GST_No_help: "Please enter GSTIN",
+
     Organization_registeredAddress_help: "Please enter registered address",
     Organization_PAN_No_help: "Please enter PAN number",
     // Organization_Tax_Deduction_No_help: "Please enter tan number",
@@ -117,38 +117,36 @@ export const orgErrorMessage = () => {
 //Leave module reasons
 import faker from "faker";
 import dayjs from "dayjs";
-
-// export const leaveReasons = () => {
-//   const leaveReasonsList = [
-//     { reason: "Out of station", description: "I am writing to request a leave of absence to travel. I am traveling on a family trip to three different places. I hope for your kind approval." },
-//     { reason: "Fever", description: "I am writing to inform you that I am not feeling well and will need to take a day off from work." },
-//     { reason: "Personal work", description: "I wish to inform you that I have to go with my younger daughter to her school for the Annual Day function today. As the function will run from morning to evening, I would not be able to attend the office." },
-//   ];
-
-//   const currentDay = dayjs().format("D");
-//   const randomLeaveReason = faker.random.arrayElement(leaveReasonsList);
-//   cy.get(".fc-day").contains(currentDay).click();
-//   cy.get("#leave_title").type(randomLeaveReason.reason);
-//   cy.get("#leave_description").type(randomLeaveReason.description);
-// };
 export const addLeaveForSpecificDay = (dayOffset) => {
   const leaveReasonsList = [
-    { reason: "Out of station", description: "I am writing to request a leave of absence to travel. I am traveling on a family trip to three different places. I hope for your kind approval." },
-    { reason: "Fever", description: "I am writing to inform you that I am not feeling well and will need to take a day off from work." },
-    { reason: "Personal work", description: "I wish to inform you that I have to go with my younger daughter to her school for the Annual Day function today. As the function will run from morning to evening, I would not be able to attend the office." },
+    {
+      reason: "Out of station",
+      description:
+        "I am writing to request a leave of absence to travel. I am traveling on a family trip to three different places. I hope for your kind approval.",
+    },
+    {
+      reason: "Fever",
+      description:
+        "I am writing to inform you that I am not feeling well and will need to take a day off from work.",
+    },
+    {
+      reason: "Personal work",
+      description:
+        "I wish to inform you that I have to go with my younger daughter to her school for the Annual Day function today. As the function will run from morning to evening, I would not be able to attend the office.",
+    },
   ];
 
   // Calculate the day text for the specific day based on the current date
   const currentDate = dayjs();
-  const selectedDate = currentDate.add(dayOffset, 'day');
+  const selectedDate = currentDate.add(dayOffset, "day");
   const dayText = selectedDate.format("D");
   const monthText = selectedDate.format("MMMM");
   const yearText = selectedDate.format("YYYY");
   const dayId = `#${monthText.toLowerCase()}_${dayText}_${yearText}`;
-  
+
   // Click on the specific day in the calendar using the generated dayId
   cy.get(dayId).click();
-  
+
   // Rest of the code remains the same
   const randomLeaveReason = faker.random.arrayElement(leaveReasonsList);
   cy.get("#leave_title").type(randomLeaveReason.reason);
@@ -159,4 +157,4 @@ export const addLeaveForSpecificDay = (dayOffset) => {
 // addLeaveForSpecificDay(0); // To add leave for the current day
 // addLeaveForSpecificDay(-1); // To add leave for the previous day
 // addLeaveForSpecificDay(1); // To add leave for the next day
-
+export const holidaysList = () => {};

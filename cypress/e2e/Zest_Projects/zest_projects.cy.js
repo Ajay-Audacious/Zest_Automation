@@ -7,6 +7,7 @@ const projectName = faker.company.companyName();
 describe("Login Test", () => {
   beforeEach(() => {
     login(credentials);
+    cy.get('#reports').click();
     cy.contains("Projects", { timeout: 5000 }).click();
   });
   describe("Projects", () => {

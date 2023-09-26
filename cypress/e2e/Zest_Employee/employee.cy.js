@@ -11,29 +11,47 @@ import { employeesErrorMessage, login } from "../common_component/common_All";
 describe("Login Test", () => {
   beforeEach(() => {
     login(credentials);
+    cy.get("#users").click();
     cy.contains("Employee", { timeout: 5000 }).click();
   });
 
+  const employeeCode = faker.datatype.number({ min: 10, max: 99 });
   describe("Employees Module", () => {
     it("Check Validation", () => {
       employeesErrorMessage(); //Verify the Placeholder error message
     });
-    it("Employee Add", () => {
+    it.only("Employee Add", () => {
+      //First Step
       cy.get("#employee_add").click();
       faker;
       cy.get("#register_name").type(name);
       cy.get("#register_email").type(email);
       cy.get("#register_number").type(contactNumber);
+      cy.get("#employeeCode").type(employeeCode);
+      cy.get("#register_joiningdate").click();
+      cy.get("td[title='2023-07-01']").click();
+      cy.get("#salary").type("20000");
+      cy.get("#register_leaves").type("2");
+      cy.get("#save").click();
+      //Second Step
+      cy.get("#register_father_name").type();
+      cy.get("#pan_card").type("ABCD1234E");
       cy.get("#register_gender").click();
       cy.contains('div[title="Male"]', "Male").click(); //Select male
       cy.get("#register_dob").click();
       cy.get("td[title='2005-07-01']").click();
-      cy.get("#register_joiningdate").click();
-      cy.get("td[title='2023-07-01']").click();
-      cy.get('#add_document').click();
-      cy.get('#register_document').type('Pancard')
-      cy.uploadFile('testimg.png', 'png');
+      cy.get("#local_address").type("Local address Vijay Nagar Indore");
+      cy.get("#address_checkbox").click();
       cy.get("#save").click();
+      //Third Step
+      cy.get("#save").click();
+      //fourth step
+      cy.get("#save").click();
+      cy.get("#save").click();
+
+      // cy.get('#add_document').click();
+      // cy.get('#register_document').type('Pancard')
+      // cy.uploadFile('testimg.png', 'png');
     });
     it("Dublicate Employee Add", () => {
       cy.get("#employee_add").click();
@@ -46,11 +64,11 @@ describe("Login Test", () => {
       cy.get("td[title='2005-07-01']").click();
       cy.get("#register_joiningdate").click();
       cy.get("td[title='2023-07-01']").click();
-      cy.get('#add_document').click();
-      cy.get('#register_document').type('Pancard')
-      cy.uploadFile('testimg.png', 'png');
+      cy.get("#add_document").click();
+      cy.get("#register_document").type("Pancard");
+      cy.uploadFile("testimg.png", "png");
       cy.get("#save").click();
-      cy.contains("Email already exists").should('be.visible')
+      cy.contains("Email already exists").should("be.visible");
       cy.contains("Mobile Already Exists").should("be.visible");
     });
     //Search User Test cases

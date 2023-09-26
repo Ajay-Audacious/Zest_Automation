@@ -9,6 +9,7 @@ import { login, rolesErrorMessage } from '../common_component/common_All';
 describe('Login Test', () => {
   beforeEach(() => {
     login(credentials);
+    cy.get('#users').click();
     cy.contains("Roles", { timeout: 5000 }).click();
   });
   describe("Roles Test cases", () => {

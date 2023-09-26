@@ -1,12 +1,12 @@
 /// <reference types="cypress-xpath" />
-import { credentials } from "../Validation/logs";
-import { verifyErrorRole } from "../Validation/errorValidation";
-import { login } from '../common_component/common_All';
+import { credentials } from "../../Validation/logs";
+import { login } from '../../common_component/common_All';
 describe('Login Test', () => {
   beforeEach(() => {
-    login(credentials);
+    cy.login();
     cy.get("#submit").click();
     cy.contains("Setting", { timeout: 5000 }).click();
+    cy.get('#Profile').click();
   });
   
   describe("Update employee Details", () => {

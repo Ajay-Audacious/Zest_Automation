@@ -4,36 +4,27 @@ import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import 'chai-jquery';
 const updateName = faker.name.findName();
-// beforeEach(() => {
-//     cy.visit("https://staging.zesthrm.com");
-//     cy.get("input[type=text]").type(testCredentials.id);
-//     cy.get("input[type=password").type(testCredentials.password);
-//     cy.get("button[type=submit").click();
-//     cy.viewport(1920, 1080)
-//     cy.contains("Setting").click();
-//     Cypress.on("uncaught:exception", (err, runnable) => {
-//       return false;
-//     });
-//   });
+const contactNumber = `9${faker.phone.phoneNumber("#########")}`; // Generate a 10-digit phone number
   import { login } from '../common_component/common_All';
 describe('Login Test', () => {
   beforeEach(() => {
     login(credentials);
-    cy.contains("Setting").click();
+    cy.contains("Settings").click();
   });
-
-  describe('Setting module update employee',()=>{
-    //Update Name only
+//Update Name only
 it('Setting Update Employee', () => {
-    cy.get("input[placeholder='Enter Name']").clear().type(updateName);
-    cy.get("button[type=submit").click();  
+    cy.get('button.ant-btn-primary._updateButton_118wl_51').click();
+    cy.get('#contact_number').clear().type(contactNumber);
+    cy.get("button[type=submit").click();
+    cy.contains("Successfully updated details").should('be.visible')
 });
 
 it('Update Password', () => {
     cy.contains("Security").click();
-    cy.get("input[placeholder='Enter old password']").type(testCredentials.password);
-    cy.get("input[placeholder='Enter new password']").type(testCredentials.password);
-    cy.get("input[placeholder='Enter confirm password']").type(testCredentials.password); 
+    cy.get('#current_password').type(testCredentials.password);
+    cy.get('#new_password').type(testCredentials.password);
+    cy.get('#confirm_new_password').type(testCredentials.password);
+    cy.get('#save').click();
 });
 });
-});
+

@@ -8,6 +8,7 @@ describe("Login Test", () => {
   beforeEach(() => {
     login(credentials);
     cy.contains("Reports", { timeout: 5000 }).click();
+    cy.get('#daily_reporting').click();
   });
   describe("Reports Module Test", () => {
     it("Check Validations", () => {
