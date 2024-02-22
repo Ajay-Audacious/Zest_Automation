@@ -19,6 +19,9 @@ import {
   verifyErrorRole,
 } from "../Validation/errorValidation"; //Employee module verify the error message Placeholder
 export const employeesErrorMessage = () => {
+  cy.wait(5000);
+  cy.get("#users").click();
+  cy.get("#employee").click();
   cy.get("#employee_add").click();
   cy.get("#save").click();
   const errors = {
@@ -27,8 +30,7 @@ export const employeesErrorMessage = () => {
     contactNumber_help: "Please enter contact number",
     employeeCode_help: "Please enter employee code",
     joiningDate_help: "Please select joining date",
-    salary_help: "Please enter salary",
-    allocatedLeaves_help: "Please fill leaves",
+    locationId_help: "Please select location",
   };
   for (const key in errors) {
     if (Object.hasOwnProperty.call(errors, key)) {
@@ -158,3 +160,63 @@ export const addLeaveForSpecificDay = (dayOffset) => {
 // addLeaveForSpecificDay(-1); // To add leave for the previous day
 // addLeaveForSpecificDay(1); // To add leave for the next day
 export const holidaysList = () => {};
+export const generateRandomIncomeCategory = () => {
+  const incomeCategories = [
+    "Commission",
+    "Clients payment",
+    "Products",
+    "Project",
+  ];
+  const randomIncomeCategory = faker.random.arrayElement(incomeCategories);
+  let description = "";
+
+  switch (randomIncomeCategory) {
+    case "Commission":
+      description = "Earned through commission on sales.";
+      break;
+    case "Clients payment":
+      description = "Payment received from clients for services rendered.";
+      break;
+    case "Products":
+      description = "Income generated from sales of products.";
+      break;
+    case "Project":
+      description = "Revenue generated from completed projects.";
+      break;
+    default:
+      description = "No description available.";
+  }
+
+  return {
+    category: randomIncomeCategory,
+    description: description,
+  };
+};
+
+export const generateRandomExpenseCategory = () => {
+  const expenseCategories = ["Office rent", "Hotel", "Events", "Other"];
+  const randomExpenseCategory = faker.random.arrayElement(expenseCategories);
+  let description = "";
+
+  switch (randomExpenseCategory) {
+    case "Office rent":
+      description = "Payment for office space rental.";
+      break;
+    case "Hotel":
+      description = "Expense incurred for hotel accommodations.";
+      break;
+    case "Events":
+      description = "Costs associated with organizing events.";
+      break;
+    case "Other":
+      description = "Miscellaneous expenses not covered by other categories.";
+      break;
+    default:
+      description = "No description available.";
+  }
+
+  return {
+    category: randomExpenseCategory,
+    description: description,
+  };
+};
