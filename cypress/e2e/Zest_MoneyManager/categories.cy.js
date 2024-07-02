@@ -40,8 +40,6 @@ describe("Login", () => {
       .within(() => {
         cy.get('button[id$="_update"]').click();
       });
-    // cy.get("#Categories_name").clear().type(); //No need to update this.
-    // cy.get("#Categories_description").clear().type();
     cy.contains("button.ant-btn-primary", "Save").click();
   });
   it("Delete First Categories", () => {

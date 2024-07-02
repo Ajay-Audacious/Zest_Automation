@@ -27,6 +27,7 @@ describe("Login Test", () => {
     });
     it.only("Employee Add", () => {
       // First Step
+
       cy.get("#employee_add").click();
       faker;
       cy.get("#register_name").type(randomFullName);

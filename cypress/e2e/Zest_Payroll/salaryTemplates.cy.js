@@ -13,12 +13,13 @@ describe("Login", () => {
     cy.get("#add_holiday").click();
     cy.get("#SalaryTemplate_templateName").type(companyName);
     cy.get("#SalaryTemplate_description").type("For this ORG Template");
-    // Earnings
+    // Earningss
     cy.get("#SalaryTemplate_earnings_0_title").click();
     cy.get("#SalaryTemplate_earnings_0_title").type("Medical");
     cy.get("#SalaryTemplate_earnings_0_amount").type("3000");
     cy.get('svg[data-icon="plus-circle"]').first().click();
     cy.get("div#type").click();
+    
     // cy.get('#SalaryTemplate_earnings_1_title').type("Basic");
     // cy.get('#SalaryTemplate_earnings_1_amount').type("40");
     // Deduction

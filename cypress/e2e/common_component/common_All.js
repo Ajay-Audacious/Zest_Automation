@@ -20,15 +20,15 @@ import {
 } from "../Validation/errorValidation"; //Employee module verify the error message Placeholder
 export const employeesErrorMessage = () => {
   cy.wait(5000);
-  cy.get("#users").click();
-  cy.get("#employee").click();
+  cy.get('[href="/employees"]', { timeout: 5000 }).click()
   cy.get("#employee_add").click();
-  cy.get("#save").click();
+  cy.contains('Submit').click();
   const errors = {
     name_help: "Please enter name",
     email_help: "Please enter valid email address",
     contactNumber_help: "Please enter contact number",
     employeeCode_help: "Please enter employee code",
+    designation_help: "Please enter designation",
     joiningDate_help: "Please select joining date",
     locationId_help: "Please select location",
   };
@@ -197,7 +197,6 @@ export const generateRandomExpenseCategory = () => {
   const expenseCategories = ["Office rent", "Hotel", "Events", "Other"];
   const randomExpenseCategory = faker.random.arrayElement(expenseCategories);
   let description = "";
-
   switch (randomExpenseCategory) {
     case "Office rent":
       description = "Payment for office space rental.";
@@ -220,3 +219,39 @@ export const generateRandomExpenseCategory = () => {
     description: description,
   };
 };
+export const generateRandomAnnouncement = () => {
+  const announcements = [
+    {
+      type: "Upcoming Office Closure",
+      description:
+        "Please be informed that our offices will be closed on [Date] due to [Reason]. Kindly plan your work accordingly and ensure that any urgent tasks are addressed beforehand.",
+    },
+    {
+      type: "New Company Policies",
+      description:
+        "We have implemented several new policies to enhance our operations and promote a positive work environment. These policies include [brief description of each policy].",
+    },
+    {
+      type: "Employee Recognition",
+      description:
+        "We would like to recognize the outstanding contributions of [Employee Name/Team] for their exceptional performance on [Project/Task]. Your hard work and dedication are truly appreciated.",
+    },
+    {
+      type: "Reminder: Safety Protocols",
+      description:
+        "As we continue to prioritize the health and safety of our employees, we kindly remind everyone to adhere to all safety protocols, including wearing masks, practicing social distancing, and following hygiene guidelines.",
+    },
+    {
+      type: "Feedback Survey",
+      description:
+        "Your feedback is invaluable to us. We invite you to participate in our latest feedback survey to help us improve our services and workplace environment. Your input is highly appreciated.",
+    },
+  ];
+
+  const randomAnnouncement = faker.random.arrayElement(announcements);
+  return {
+    type: randomAnnouncement.type,
+    description: randomAnnouncement.description,
+  };
+};
+export const getCurrentDate = () => dayjs().format("YYYY-MM-DD");

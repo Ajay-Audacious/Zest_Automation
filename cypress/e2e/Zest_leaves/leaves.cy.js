@@ -38,5 +38,6 @@ describe("Login Test", () => {
       cy.contains("OK").click();
       cy.contains("Leave rejected successfully").should("be.visible");
     });
+    
   });
 });

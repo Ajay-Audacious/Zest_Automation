@@ -1,15 +1,15 @@
 /// <reference types="cypress-xpath" />
-import { faker } from "@faker-js/faker";
 import { credentials } from "../Validation/logs";
 import { login } from "../common_component/common_All";
+import { faker } from "@faker-js/faker";
 const invoiceNumber = faker.datatype.number();
 describe("Login", () => {
   beforeEach(() => {
     login(credentials);
-    cy.contains("Income", { timeout: 5000 }).click();
+    cy.get('a[href="/money-manager/expenses"]', { timeout: 5000 }).click();
   });
-
   it("Verify error message when saving without entering data", () => {
+    cy.get("#add_incoms").click();
     cy.contains("Save").click();
     cy.get("#income-and-expenses_invoiceNo_help")
       .should("be.visible")
@@ -24,11 +24,11 @@ describe("Login", () => {
       .should("be.visible")
       .contains("Please enter amount");
   });
-  it("Add Incomes", () => {
+  it("Add Expense", () => {
     cy.get("#add_incoms").click();
     cy.get("#income-and-expenses_invoiceNo").type(invoiceNumber);
-    cy.get("#income-and-expenses_category").type("commission");
-    cy.get('[title="Commission"]').click();
+    cy.get("#income-and-expenses_category").type("Hotel");
+    cy.get('[title="Hotel"]').click();
     cy.get("#income-and-expenses_mode").type("IMPS");
     cy.get("#income-and-expenses_amount").type("15000");
     cy.get("#income-and-expenses_description").type(
@@ -37,9 +37,9 @@ describe("Login", () => {
     cy.contains("Save").click();
     cy.get(".ant-message-notice-content")
       .should("be.visible")
-      .contains("Income added successfully");
+      .contains("Expense added successfully");
   });
-  it("Update Income", () => {
+  it("Update Expense", () => {
     cy.get(".ant-table-tbody")
       .find("tr")
       .first()
@@ -48,6 +48,7 @@ describe("Login", () => {
       });
     cy.get("#income-and-expenses_amount").clear().type("20000");
     cy.contains("Save").click();
+    cy.contains("Expense updated successfully").should("be.visible");
   });
   it("Delete Income", () => {
     cy.get(".ant-table-tbody")
