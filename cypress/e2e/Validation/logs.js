@@ -15,3 +15,8 @@ export const credentials = {
     confirmPassword:'Demo@12345',
 
   }
+
+  export const emailLogin = {
+    id: 'ajay.sharma@techiegent.com',
+    password: 'Ajay@1122'
+  };
