@@ -11,6 +11,7 @@ export class registerPage {
     checkbox: "input[value='1'][name='agree']",
     submit: "input[value='Continue']",
   };
+  //check the cypress.config for setup
   openURl() {
     cy.visit(Cypress.env("URL"));
   }

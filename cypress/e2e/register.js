@@ -9,10 +9,7 @@ describe("Register the page", () => {
     registerObject.enterEmail(registerData.email);
     registerObject.entertelePhone(registerData.telephone);
     registerObject.enterPassword(registerData.password);
-    // registerObject.enterConfirmPassword(registerData.enterConfirmPassword)
     registerObject.selectPvcy();
     registerObject.submit();
-    // registerObject.clickOnRegister()
-    // registerObject.verifyRegisterSuccess()
   });
 });

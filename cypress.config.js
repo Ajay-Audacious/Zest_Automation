@@ -28,7 +28,7 @@ module.exports = defineConfig({
       return config;
     },
   },
-  //Setup env for the login in this
+  //Setup env for the login in this for the new 
   env: {
     URL: "https://naveenautomationlabs.com/opencart/index.php?route=account/register",
   },
