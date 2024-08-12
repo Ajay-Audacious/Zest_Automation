@@ -74,8 +74,8 @@ export const projectsErrorMessage = () => {
 };
 //Verify the Reports Module error message Placeholder
 export const reportsErrorMessage = () => {
-  cy.get("button[type='button']").click();
-  cy.contains("Save").click();
+  cy.get('#add_report').click();
+  cy.get('#save').click();
   const errors = {
     reports_tasks_0_startTime_help: "Please select start time",
     reports_tasks_0_endTime_help: "Please select end time",
@@ -137,18 +137,6 @@ export const addLeaveForSpecificDay = (dayOffset) => {
         "I wish to inform you that I have to go with my younger daughter to her school for the Annual Day function today. As the function will run from morning to evening, I would not be able to attend the office.",
     },
   ];
-
-  // Calculate the day text for the specific day based on the current date
-  const currentDate = dayjs();
-  const selectedDate = currentDate.add(dayOffset, "day");
-  const dayText = selectedDate.format("D");
-  const monthText = selectedDate.format("MMMM");
-  const yearText = selectedDate.format("YYYY");
-  const dayId = `#${monthText.toLowerCase()}_${dayText}_${yearText}`;
-
-  // Click on the specific day in the calendar using the generated dayId
-  cy.get(dayId).click();
-
   // Rest of the code remains the same
   const randomLeaveReason = faker.random.arrayElement(leaveReasonsList);
   cy.get("#leave_title").type(randomLeaveReason.reason);

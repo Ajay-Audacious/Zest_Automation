@@ -1,6 +1,6 @@
-import { registerPage } from "../../pages/registerPage";
+import { registerPage } from "../pages/registerPage";
 const registerObject = new registerPage();
-import registerData from "../../fixtures/registerData.json";
+import registerData from "../fixtures/registerData.json";
 describe("Register the page", () => {
   it("Register flow", () => {
     registerObject.openURl();

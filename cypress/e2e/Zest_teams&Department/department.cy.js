@@ -3,7 +3,7 @@
 import { faker } from "@faker-js/faker";
 import { login } from "../common_component/common_All";
 import { credentials } from "../Validation/logs";
-import 'cypress-file-upload';
+import "cypress-file-upload";
 
 const departmentName = faker.commerce.department();
 const description = `This department, ${departmentName}, focuses on ${faker.company.bsBuzz()} and ${faker.company.bsNoun()}.`;
@@ -11,6 +11,7 @@ const description = `This department, ${departmentName}, focuses on ${faker.comp
 describe("Department Management", () => {
   beforeEach(() => {
     login(credentials);
+    cy.wait(5000);
     cy.get('[href="/departments"]').click();
   });
   it("Verify Error Message", () => {
@@ -31,6 +32,8 @@ describe("Department Management", () => {
     cy.get(".rc-virtual-list-holder-inner>").eq(2).click();
     cy.get("#uniqueIdentifier").type(faker.datatype.uuid());
     cy.get("#description").type(description);
+    cy.get(".ant-upload-drag").click();
+    cy.uploadFile("testimg.png", "png");
     cy.xpath("//span[normalize-space()='Save']").click();
     cy.contains("Department create successfully").should("be.visible");
   });
@@ -40,6 +43,7 @@ describe("Department Management", () => {
     cy.xpath("//span[normalize-space()='Save']").click();
     cy.contains("Department update successfully").should("be.visible");
   });
+
   it("Add Teams", () => {
     cy.xpath(`//a[normalize-space()='${departmentName}']`).click();
     cy.get(".ant-empty-footer").click();
@@ -78,10 +82,5 @@ describe("Department Management", () => {
       "be.visible",
       "Department deleted successfully"
     );
-  });
-  it.only('Add document', () => {
-    cy.get("#add_role").click();
-    cy.get('.ant-upload-drag').click();
-    cy.uploadFile('testimg.png', 'png');
   });
 });
