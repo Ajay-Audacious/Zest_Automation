@@ -1,0 +1,9 @@
+
+{
+    "fristName": "Test",
+    "lastName": "QA",
+    "email": "Qa123@yopmail.com",
+    "telephone": "8888888888",
+    "password": "Cypress123!!",
+    "confirmPassword": "Cypress123!!"
+}
